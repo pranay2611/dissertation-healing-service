@@ -91,10 +91,12 @@ class FixSuggestionControllerTest {
         orderController.setContent("@RestController @RequestMapping(\"/api/orders\") public class OrderController { ... }");
 
         FixSuggestionRequest.MicroserviceContext ctx = new FixSuggestionRequest.MicroserviceContext();
-        ctx.setServiceName("user-service");
-        ctx.setBuildTool("maven");
-        ctx.setSpringBootVersion("3.2.3");
-        ctx.setSourceFiles(List.of(authController, orderController));
+        FixSuggestionRequest.ServiceInfo service = new FixSuggestionRequest.ServiceInfo();
+        service.setServiceName("user-service");
+        service.setBuildTool("maven");
+        service.setSpringBootVersion("3.2.3");
+        service.setSourceFiles(List.of(authController, orderController));
+        ctx.setServices(List.of(service));
 
         TestResultReport report = new TestResultReport();
         TestSuite suite = new TestSuite();
