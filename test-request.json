@@ -1,0 +1,53 @@
+{
+  "testResultJson": {
+    "generatedAt": "2026-03-01T13:26:50.396605Z",
+    "suites": [
+      {
+        "name": "TestSuite",
+        "testCases": [
+          {
+            "name": "testUserRegistrationContract",
+            "status": "FAILED",
+            "failure": {
+              "message": "Actual status: 400. Response: Bad Request /api/auth/register expected [200] but found [400]",
+              "type": "java.lang.AssertionError",
+              "stackTrace": "java.lang.AssertionError: it should return 200. Actual status: 400. Response: {\"timestamp\":\"2026-03-01T13:26:48.873+00:00\",\"status\":400,\"error\":\"Bad Request\",\"path\":\"/api/auth/register\"} expected [200] but found [400]\n\tat org.testng.Assert.fail(Assert.java:111)\n\tat org.testng.Assert.failNotEquals(Assert.java:1578)\n\tat org.testng.Assert.assertEqualsImpl(Assert.java:150)\n\tat org.testng.Assert.assertEquals(Assert.java:132)\n\tat org.testng.Assert.assertEquals(Assert.java:1419)\n\tat org.testng.Assert.assertEquals(Assert.java:1383)\n\tat com.dissertation.integrationtestautomation.tests.MicroservicesIntegrationTest.testUserRegistrationContract(MicroservicesIntegrationTest.java:1139)\n\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)\n\tat org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)\n\tat org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)\n\tat org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)\n\tat org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)\n\tat org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)\n\tat org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)\n\tat org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)\n\tat java.base/java.lang.Thread.run(Thread.java:1575)"
+            }
+          },
+          {
+            "name": "testOrderCreation",
+            "status": "FAILED",
+            "failure": {
+              "message": "expected [201] but found [500]. JSON parse error: Cannot deserialize value of type BigDecimal from String ten",
+              "type": "java.lang.AssertionError",
+              "stackTrace": "java.lang.AssertionError: order creation should return 201. Actual status: 500. Response: {\"path\":\"/api/orders\",\"error\":\"Internal Server Error\",\"message\":\"JSON parse error: Cannot deserialize value of type `java.math.BigDecimal` from String \\\"not_a_number\\\": not a valid representation\",\"timestamp\":\"2026-03-01T13:26:49.448338381\",\"status\":500} expected [201] but found [500]\n\tat org.testng.Assert.fail(Assert.java:111)\n\tat org.testng.Assert.failNotEquals(Assert.java:1578)\n\tat org.testng.Assert.assertEqualsImpl(Assert.java:150)\n\tat org.testng.Assert.assertEquals(Assert.java:132)\n\tat org.testng.Assert.assertEquals(Assert.java:1419)\n\tat org.testng.Assert.assertEquals(Assert.java:1383)\n\tat com.dissertation.integrationtestautomation.tests.MicroservicesIntegrationTest.testOrderCreationInternalError_IntendedToFail(MicroservicesIntegrationTest.java:1175)\n\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)\n\tat org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)\n\tat org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)\n\tat org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)\n\tat org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)\n\tat org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)\n\tat org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)\n\tat org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)\n\tat java.base/java.lang.Thread.run(Thread.java:1575)"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "microserviceContext": {
+    "services": [
+      {
+        "serviceName": "user-service",
+        "buildTool": "maven",
+        "springBootVersion": "3.2.3",
+        "sourceFiles": [
+          {
+            "filePath": "src/main/java/com/dissertation/userservice/controller/AuthController.java",
+            "content": "package com.dissertation.userservice.controller;\n\nimport com.dissertation.userservice.dto.AuthRequest;\nimport com.dissertation.userservice.dto.AuthResponse;\nimport com.dissertation.userservice.dto.RegisterRequest;\nimport com.dissertation.userservice.dto.UserResponse;\nimport com.dissertation.userservice.service.AuthService;\nimport jakarta.servlet.http.HttpServletRequest;\nimport jakarta.validation.Valid;\nimport lombok.RequiredArgsConstructor;\nimport lombok.extern.slf4j.Slf4j;\nimport org.springframework.http.HttpStatus;\nimport org.springframework.http.ResponseEntity;\nimport org.springframework.security.authentication.BadCredentialsException;\nimport org.springframework.security.core.AuthenticationException;\nimport org.springframework.web.bind.annotation.*;\n\n@RestController\n@RequestMapping(\"/api/auth\")\n@RequiredArgsConstructor\n@CrossOrigin(origins = \"*\", maxAge = 3600)\n@Slf4j\npublic class AuthController {\n    \n    private final AuthService authService;\n    \n    @PostMapping(\"/register\")\n    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request, HttpServletRequest httpRequest) {\n        log.info(\"=== Register Request Received ===\");\n        log.info(\"Method: {}\", httpRequest.getMethod());\n        log.info(\"Request URI: {}\", httpRequest.getRequestURI());\n        return ResponseEntity.ok(authService.register(request));\n    }\n    \n    @PostMapping(\"/login\")\n    public ResponseEntity<?> login(@Valid @RequestBody AuthRequest request) {\n        try {\n            AuthResponse response = authService.authenticate(request);\n            return ResponseEntity.ok(response);\n        } catch (BadCredentialsException e) {\n            log.warn(\"Login failed for username: {} - Bad credentials\", request.getUsername());\n            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)\n                    .body(\"{\\\"error\\\":\\\"Unauthorized\\\",\\\"message\\\":\\\"Invalid username or password\\\"}\");\n        } catch (AuthenticationException e) {\n            log.warn(\"Login failed for username: {} - Authentication exception: {}\", request.getUsername(), e.getMessage());\n            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)\n                    .body(\"{\\\"error\\\":\\\"Unauthorized\\\",\\\"message\\\":\\\"\" + e.getMessage() + \"\\\"}\");\n        } catch (Exception e) {\n            log.error(\"Login failed for username: {} - Unexpected error\", request.getUsername(), e);\n            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)\n                    .body(\"{\\\"error\\\":\\\"Internal Server Error\\\",\\\"message\\\":\\\"An unexpected error occurred\\\"}\");\n        }\n    }\n    \n    @GetMapping(\"/user/{username}\")\n    public ResponseEntity<UserResponse> getUser(@PathVariable String username) {\n        return ResponseEntity.ok(authService.getUserByUsername(username));\n    }\n    \n    @GetMapping(\"/health\")\n    public ResponseEntity<String> health() {\n        return ResponseEntity.ok(\"User Service is running\");\n    }\n}\n\n"
+          },
+          {
+            "filePath": "src/main/java/com/dissertation/userservice/dto/RegisterRequest.java",
+            "content": "package com.dissertation.userservice.dto;\n\nimport jakarta.validation.constraints.Email;\nimport jakarta.validation.constraints.NotBlank;\nimport jakarta.validation.constraints.Size;\nimport lombok.Data;\n\n@Data\npublic class RegisterRequest {\n    @NotBlank(message = \"Username is required\")\n    @Size(min = 3, max = 20, message = \"Username must be between 3 and 20 characters\")\n    private String username;\n\n    @NotBlank(message = \"Email is required\")\n    @Email(message = \"Invalid email format\")\n    private String email;\n\n    @NotBlank(message = \"Password is required\")\n    @Size(min = 6, message = \"Password must be at least 6 characters\")\n    private String password;\n\n    private String role = \"USER\";\n}\n"
+          },
+          {
+            "filePath": "src/test/java/com/dissertation/integrationtestautomation/tests/MicroservicesIntegrationTest.java",
+            "content": "public class MicroservicesIntegrationTest {\n    private static final String BASE_URL = \"http://localhost:8080\";\n\n    @Test(priority = 12, description = \"user registration\")\n    public void testUserRegistrationContract() {\n        Map<String, Object> wrongBody = new HashMap<>();\n        wrongBody.put(\"userName\", \"contractuser\");  \n        wrongBody.put(\"mail\", \"contractuser@example.com\");  \n        wrongBody.put(\"password\", \"password123\");\n        wrongBody.put(\"role\", \"USER\");\n\n        Response response = RestAssured.given()\n                .baseUri(BASE_URL)\n                .contentType(ContentType.JSON)\n                .body(wrongBody)\n                .when()\n                .post(\"/api/auth/register\")\n                .then()\n                .extract()\n                .response();\n\n        Reporter.log(\"Response Body: \" + response.getBody().asString(), true);\n\n        Assert.assertEquals(response.getStatusCode(), 200,\n                \"it should return 200. \" +\n                        \"Actual status: \" + response.getStatusCode() + \". Response: \" + response.getBody().asString());\n    }\n}\n"
+          }
+        ]
+      }
+    ]
+  }
+}

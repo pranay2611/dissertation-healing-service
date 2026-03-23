@@ -1,0 +1,30 @@
+{
+  "testResultJson": {
+    "generatedAt": "2026-03-01T13:26:50.396605Z",
+    "suites": [
+      {
+        "name": "TestSuite",
+        "testCases": [
+          {
+            "name": "testUserRegistrationContract",
+            "status": "FAILED",
+            "failure": {
+              "message": "Actual status: 400. Response: Bad Request /api/auth/register expected [200] but found [400]",
+              "type": "java.lang.AssertionError",
+              "stackTrace": "java.lang.AssertionError: it should return 200. Actual status: 400. Response: {\"timestamp\":\"2026-03-01T13:26:48.873+00:00\",\"status\":400,\"error\":\"Bad Request\",\"path\":\"/api/auth/register\"} expected [200] but found [400]\n\tat org.testng.Assert.fail(Assert.java:111)\n\tat org.testng.Assert.failNotEquals(Assert.java:1578)\n\tat org.testng.Assert.assertEqualsImpl(Assert.java:150)\n\tat org.testng.Assert.assertEquals(Assert.java:132)\n\tat org.testng.Assert.assertEquals(Assert.java:1419)\n\tat org.testng.Assert.assertEquals(Assert.java:1383)\n\tat com.dissertation.integrationtestautomation.tests.MicroservicesIntegrationTest.testUserRegistrationContract(MicroservicesIntegrationTest.java:1139)\n\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)\n\tat org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)\n\tat org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)\n\tat org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)\n\tat org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)\n\tat org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)\n\tat org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)\n\tat org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)\n\tat java.base/java.lang.Thread.run(Thread.java:1575)"
+            }
+          },
+          {
+            "name": "testOrderCreation",
+            "status": "FAILED",
+            "failure": {
+              "message": "expected [201] but found [500]. JSON parse error: Cannot deserialize value of type BigDecimal from String ten",
+              "type": "java.lang.AssertionError",
+              "stackTrace": "java.lang.AssertionError: order creation should return 201. Actual status: 500. Response: {\"path\":\"/api/orders\",\"error\":\"Internal Server Error\",\"message\":\"JSON parse error: Cannot deserialize value of type `java.math.BigDecimal` from String \\\"not_a_number\\\": not a valid representation\",\"timestamp\":\"2026-03-01T13:26:49.448338381\",\"status\":500} expected [201] but found [500]\n\tat org.testng.Assert.fail(Assert.java:111)\n\tat org.testng.Assert.failNotEquals(Assert.java:1578)\n\tat org.testng.Assert.assertEqualsImpl(Assert.java:150)\n\tat org.testng.Assert.assertEquals(Assert.java:132)\n\tat org.testng.Assert.assertEquals(Assert.java:1419)\n\tat org.testng.Assert.assertEquals(Assert.java:1383)\n\tat com.dissertation.integrationtestautomation.tests.MicroservicesIntegrationTest.testOrderCreationInternalError_IntendedToFail(MicroservicesIntegrationTest.java:1175)\n\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)\n\tat org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)\n\tat org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)\n\tat org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)\n\tat org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)\n\tat org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)\n\tat org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)\n\tat org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)\n\tat java.base/java.lang.Thread.run(Thread.java:1575)"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

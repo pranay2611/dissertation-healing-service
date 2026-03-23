@@ -1,0 +1,38 @@
+server:
+  port: 8092
+
+spring:
+  application:
+    name: claude-fix-suggestion-service
+
+claude:
+  api:
+    key: ${CLAUDE_API_KEY:...}
+    url: https://api.anthropic.com/v1/messages
+    model: claude-sonnet-4-20250514
+    max-tokens: 2000
+    version: 2023-06-01
+
+codesage:
+  model:
+    name: microsoft/codebert-base        # CodeSage-compatible HuggingFace model
+    max-sequence-length: 512
+    similarity-threshold: 0.75           # Minimum cosine similarity to flag cross-service dependency
+
+fix:
+  stack-trace:
+    max-frames: 5                        # Max stack frames to send to Claude (token efficiency)
+  confidence:
+    high-threshold: 0.85
+    medium-threshold: 0.60
+
+logging:
+  level:
+    com.dissertation.fixsuggestion: DEBUG
+    ai.djl: WARN
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
